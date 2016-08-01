@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 
 var Git = require("nodegit");
-var extractPath = '/Users/mbalduciel/mlmdata';
+var extractPath = '/Users/mikelbalducieldiaz/mlmdata';
 var gitFolder = '/Users/mbalduciel/Develop/gitcommand/beacon';
 var remoteName = 'remoteProyect';
 var token = 'mibaldi'
@@ -101,9 +101,11 @@ router.post('/cloneRepo', function(req, routeResponse) {
 
 router.get('/deleteFolders',function (req, res) {
     var dirs = fs.readdirSync(extractPath).filter(function (file) {
-        return fs.statSync(path.join(extractPath, file)).isDirectory() && file.charAt(0) !== '.';
+        return fs.statSync(path.join(extractPath, file));
+        //return fs.statSync(path.join(extractPath, file)).isDirectory() && file.charAt(0) !== '.';
     });
-    console.log("directorios",dirs);
+    var mtime = dirs[0].mtime;
+    console.log("directorios",mtime);
     res.send("ficheros borrados")
 });
 
